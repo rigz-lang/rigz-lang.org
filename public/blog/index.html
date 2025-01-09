@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rigz</title>
+  <title>Rigz Blog</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -52,6 +52,20 @@
       max-width: 800px;
       padding: 20px;
     }
+    .blog-post {
+      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: left;
+    }
+    .blog-post h2 {
+      margin-top: 0;
+    }
+    .blog-post p {
+      margin: 10px 0;
+    }
     footer {
       margin-top: 40px;
       padding: 10px;
@@ -59,15 +73,12 @@
       color: #fff;
       width: 100%;
     }
-    li {
-      list-style: none;
-    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to Rigz!</h1>
-    <p></p>
+    <h1>Rigz Blog</h1>
+    <p>Stay up-to-date with the latest updates, tutorials, and insights about Rigz.</p>
   </header>
 
   <nav>
@@ -79,13 +90,14 @@
   </nav>
 
   <div class="content">
-    <h2>Why Rigz?</h2>
-    <p>Rigz is a dynamic scripting language written in Rust, heavily inspired by Ruby, Kotlin, and Rust.</p>
+    <h2>Recent Posts</h2>
 
-    <h3>Key Features</h3>
-    <ul>
-      <li>💡 Intuitive Syntax - Easy to read and write</li>
-    </ul>
+    <div class="blog-post">
+      <h2>🚀 Introducing Rigz v0.5.0</h2>
+      <p><strong>Date:</strong> January 10, 2025</p>
+      <p>We're excited to announce the release of Rigz v0.5.0! In this post, we explore the new features and what makes Rigz unique.</p>
+      <a href="/blog/rigz_0.5.0" style="color: #007acc;">Read more...</a>
+    </div>
   </div>
 
   <footer>
