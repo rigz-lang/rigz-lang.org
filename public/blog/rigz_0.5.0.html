@@ -134,11 +134,11 @@
       This syntax is heavily inspired by terraform and values will be converted to a list when calling it.
 
       Values (or keys in maps) that return none will be filtered out.
-
-      <code>[for v in [1, 2, 3, 'a', 'b']: v if v.is_num] # [1, 2, 3]</code>
-      A single value is now supported for maps, the key and value will be the same.
-      <code>{for k, v in {1, 2, 3}: k, v if k % 2 == 0} # {2 = 2}</code>
     </p>
+
+    <code>[for v in [1, 2, 3, 'a', 'b']: v if v.is_num] # [1, 2, 3]</code>
+    <p>A single value is now supported for maps, the key and value will be the same.</p>
+    <code>{for k, v in {1, 2, 3}: k, v if k % 2 == 0} # {2 = 2}</code>
 
     <h3>Lambda Support</h3>
     <p>
