@@ -97,6 +97,7 @@
     <h2>Rigz 0.5.0</h2>
     <p><strong>Author:</strong> Mitch</p>
     <p><strong>Date:</strong> January 10, 2025</p>
+    <p><strong>Updated:</strong> January 17, 2025</p>
 
     <p>
       <em>The biggest release of Rigz so far!</em>
@@ -175,6 +176,15 @@
       The VM module has been updated to reflect this is now a stack based VM.
     </p>
 
+    <h3>Memoization</h3>
+    <p>
+      The @memo lifecycle can be used to add memoization to a function, similar to Python's [@cache](https://docs.python.org/3/library/functools.html)
+  
+      Currently largely recursive functions may run into a stackoverflow in the Rust code, this will be addressed.
+      
+      Once lifecycle functions are supported you'll be able to customize how this works.
+    </p>
+
     <h3>Processes</h3>
     <p>
       Processes can now be created with the @on lifecycle or by using `spawn`, there's still a lot of work to do here but simple use cases will work.
@@ -238,7 +248,7 @@
     </p>
 
     <h4>More Lifecycles & Meta-programming</h4>
-    <p>With @on and @test being stabilized, the next focus is @after to support terraform style plan & apply runs. The ability to create and manage your own lifecycles will be added. Part of this should include metaprogramming support.</p>
+    <p>With @memo, @on, and @test being stabilized, the next focus is @after to support terraform style plan & apply runs. The ability to create and manage your own lifecycles will be added. Part of this should include metaprogramming support.</p>
 
     <h4>Custom Types</h4>
     <p>
