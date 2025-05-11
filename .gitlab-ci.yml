@@ -8,7 +8,7 @@ pages:
   script:
     - npm ci
     - npm run build
-    - cp public/index.html assets/404.html
+    - cp public/index.html public/404.html
   artifacts:
     paths:
       - public
