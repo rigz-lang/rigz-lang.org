@@ -6,9 +6,9 @@ cache:
 
 pages:
   script:
-    - cp index.html assets/404.html
     - npm ci
     - npm run build
+    - cp public/index.html assets/404.html
   artifacts:
     paths:
       - public
