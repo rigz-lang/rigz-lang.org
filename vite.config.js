@@ -35,5 +35,9 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
     },
+  },
+  publicDir: 'assets',
+  build: {
+    outDir: 'public'
   }
 });
