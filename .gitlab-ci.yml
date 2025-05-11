@@ -1,9 +1,10 @@
-image: busybox
+image: node:latest
 pages:
   script:
-    - echo "The site will be deployed to $CI_PAGES_URL"
+    - npm ci
+    - npm run build
   artifacts:
     paths:
-      - public
+      - dist
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
