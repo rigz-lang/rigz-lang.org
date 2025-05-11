@@ -7,8 +7,6 @@ import { routeTree } from './routeTree.gen'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
-// @ts-expect-error
-import '@wooorm/starry-night/style/light'
 
 // Create a new router instance
 const router = createRouter({

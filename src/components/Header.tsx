@@ -11,19 +11,20 @@ import {
 import { Menu, X, ExternalLink } from 'lucide-react'
 import { blogs, latest } from '@/blog/all'
 import { Separator } from './ui/separator'
+import { ThemeToggle } from './theme'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white border-b shadow-sm px-6 py-3">
+    <header className="border-b shadow-sm px-6 py-3">
       <div className="flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
+        <Link to="/" className="text-2xl font-bold hover:text-blue-600 transition-colors">
           rigz
         </Link>
 
         <button
-          className="md:hidden p-2 rounded text-gray-700 hover:bg-gray-100"
+          className="md:hidden p-2 rounded hover:bg-gray-100"
           onClick={() => setMenuOpen((open) => !open)}
           aria-label="Toggle menu"
         >
@@ -31,7 +32,7 @@ export default function Header() {
         </button>
 
         <NavigationMenu className="hidden md:block">
-          <NavigationMenuList className="flex gap-x-6 text-sm font-medium text-gray-700">
+          <NavigationMenuList className="flex gap-x-6 text-sm font-medium">
             <NavigationMenuItem asChild>
               <NavigationMenuLink asChild>
                 <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
@@ -82,18 +83,21 @@ export default function Header() {
                 Try Rigz <ExternalLink className="w-4 h-4 inline" />
               </NavigationMenuLink>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <ThemeToggle />
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
 
       {menuOpen && (
-        <nav className="md:hidden mt-4 space-y-4 text-sm text-gray-700">
+        <nav className="md:hidden mt-4 space-y-4 text-sm">
           <Link to="/" className="block hover:text-blue-600 transition-colors" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
 
           <div>
-            <span className="font-medium text-gray-900">Blog</span>
+            <span className="font-medium">Blog</span>
             <ul className="ml-4 mt-2 space-y-1">
               {latest.map((post) => (
                 <li key={post}>
@@ -136,6 +140,8 @@ export default function Header() {
           >
             Try Rigz
           </a>
+
+          <ThemeToggle />
         </nav>
       )}
     </header>

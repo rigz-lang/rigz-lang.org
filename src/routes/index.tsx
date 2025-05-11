@@ -57,7 +57,7 @@ function ComponentLink({ crate, description }: { crate: string, description: str
       >
         {crate}
       </a>{' '}
-      – <span className="text-gray-700">{description}</span>
+      – <span className="">{description}</span>
     </li>
   )
 }
@@ -70,7 +70,7 @@ function App() {
   })
 
   return (
-    <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 text-gray-900">
+    <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       <section className="mb-12">
         <h2 className="text-3xl font-bold mb-4">Why Rigz?</h2>
         <div className="grid md:grid-cols-2 gap-8">
@@ -97,7 +97,7 @@ function App() {
             </div>
           </div>
 
-          <div className="rounded border bg-gray-50 p-4 overflow-auto text-sm leading-relaxed h-fit my-auto">
+          <div className="rounded border p-4 overflow-auto text-sm leading-relaxed h-fit my-auto">
             <pre className="language-rb whitespace-pre-wrap">
               <code><Suspense>{highlighted}</Suspense></code>
             </pre>

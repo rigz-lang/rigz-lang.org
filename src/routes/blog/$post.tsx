@@ -17,8 +17,8 @@ const components: MDXComponents = {
   h3: (props) => <h3 className="text-xl font-semibold mt-5 mb-2" {...props} />,
   h4: (props) => <h4 className="text-lg font-semibold mt-4 mb-2" {...props} />,
   p: (props) => <p className="my-4 leading-relaxed" {...props} />,
-  pre: (props) => <pre className="my-4 overflow-auto rounded bg-gray-100 p-4 text-sm" {...props} />,
-  code: (props) => <code className="bg-gray-100 rounded px-1 text-sm" {...props} />,
+  pre: (props) => <pre className="my-4 overflow-auto rounded p-4 text-sm" {...props} />,
+  code: (props) => <code className="rounded px-1 text-sm" {...props} />,
   ul: (props) => <ul className="list-disc ms-8 my-4 space-y-2" {...props} />,
   ol: (props) => <ol className="list-decimal ms-8 my-4 space-y-2" {...props} />,
   li: (props) => <li className="leading-relaxed" {...props} />,
@@ -43,15 +43,15 @@ function RouteComponent() {
   const c = useMDXComponents(components)
 
   return (
-    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10 text-gray-800">
+    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
       <header>
         <h1 className="text-4xl font-extrabold leading-tight tracking-tight">{title}</h1>
-        <div className="mt-2 text-sm text-gray-600 space-y-1">
+        <div className="mt-2 text-sm space-y-1">
           <p><strong>Author:</strong> {author}</p>
           <p><strong>Published:</strong> {format(date, 'PPP')}</p>
           {updated && <p><strong>Updated:</strong> {format(updated, 'PPP')}</p>}
         </div>
-        {summary && <p className="mt-4 italic text-gray-700">{summary}</p>}
+        {summary && <p className="mt-4 italic">{summary}</p>}
       </header>
 
       <Separator className="my-6" />
