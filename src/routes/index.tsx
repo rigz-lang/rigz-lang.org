@@ -1,13 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
+import hljs from "highlight.js";
+// @ts-ignore
+import {rigz} from '@rigz-lang/highlight.js'
 
-import { createStarryNight } from '@wooorm/starry-night'
-import ruby from '@wooorm/starry-night/source.ruby'
-import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
-import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+hljs.registerLanguage('rigz', rigz);
 
 import { BlogPreview, latest } from '@/blog/all'
-import { Suspense } from 'react'
-import hljs from "@/lib/highlighting.js"
 
 export const Route = createFileRoute('/')({
   component: App,

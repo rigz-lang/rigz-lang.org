@@ -12,7 +12,7 @@ export const Highlighting = () => {
 
   useEffect(() => {
     const linkId = "highlight-js-theme"
-    let link = document.getElementById(linkId)
+    let link = document.getElementById(linkId) as HTMLLinkElement | null
 
     if (!link) {
       link = document.createElement("link")

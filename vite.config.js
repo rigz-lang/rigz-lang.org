@@ -6,7 +6,7 @@ import mdx from '@mdx-js/rollup'
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { resolve } from "node:path";
 import rehypeHighlight from 'rehype-highlight'
-import {rigz} from "./src/lib/highlighting";
+import {rigz} from '@rigz-lang/highlight.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
