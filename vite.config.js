@@ -5,7 +5,8 @@ import mdx from '@mdx-js/rollup'
 
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { resolve } from "node:path";
-import rehypeStarryNight from 'rehype-starry-night'
+import rehypeHighlight from 'rehype-highlight'
+import {rigz} from "./src/lib/highlighting";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
         remarkRehypeOptions: {
 
         },
-        rehypePlugins: [rehypeStarryNight]
+        rehypePlugins: [[rehypeHighlight, {languages: {rigz}}]]
       })
     },
     TanStackRouterVite({ autoCodeSplitting: true }), 

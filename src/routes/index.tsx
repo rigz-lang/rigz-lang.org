@@ -7,6 +7,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 
 import { BlogPreview, latest } from '@/blog/all'
 import { Suspense } from 'react'
+import hljs from "@/lib/highlighting.js"
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -63,11 +64,9 @@ function ComponentLink({ crate, description }: { crate: string, description: str
 }
 
 function App() {
-  const highlighted = createStarryNight([ruby]).then(starryNight => {
-    const tree = starryNight.highlight(sample, 'source.ruby')
-
-    return toJsxRuntime(tree, { Fragment, jsx, jsxs })
-  })
+  const highlighted = hljs.highlight(sample, {
+    language: 'rigz'
+  });
 
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
@@ -76,14 +75,14 @@ function App() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6 text-lg">
             <p>
-              Rigz is a dynamic scripting language written in Rust, inspired by Ruby, Kotlin, and Rust. It aims to offer an expressive syntax with a powerful VM.
+              Rigz is a dynamic scripting language written in Rust, inspired by Ruby, Kotlin, and Rust.
             </p>
 
             <div>
               <h3 className="text-xl font-semibold mb-2">Key Features</h3>
               <ul className="list-disc ms-6 space-y-1">
                 <li>Intuitive syntax - easy to read and write</li>
-                <li>Resumable VM - snapshot your execution state</li>
+                <li>Resumable VM - snapshot your VM and resume from that point</li>
               </ul>
             </div>
 
@@ -99,7 +98,7 @@ function App() {
 
           <div className="rounded border p-4 overflow-auto text-sm leading-relaxed h-fit my-auto">
             <pre className="language-rb whitespace-pre-wrap">
-              <code><Suspense>{highlighted}</Suspense></code>
+              <code dangerouslySetInnerHTML={{__html: highlighted.value}}/>
             </pre>
           </div>
         </div>

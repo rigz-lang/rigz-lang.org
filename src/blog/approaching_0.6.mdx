@@ -1,0 +1,129 @@
+import {Link} from '@tanstack/react-router'
+
+export const author = 'Mitch'
+export const date = new Date('2025-07-03T12:00')
+export const title = 'Approaching 0.6'
+export const summary = 'Improving the experience and flushing out the language'
+
+It has been a slow year for Rigz but a lot is improving and currently underway.
+
+## REPL Improvements
+
+Until now it has been a slow process to try out the latest version of rigz, unless you're building it for yourself;
+the REPL is now updated to always use the latest version of rigz. With the current improvements there is now parity 
+between the web and standard versions, where possible. While some portions of rigz won't work in a JavaScript 
+environment (i.e. Files), the Process API (spawn, send, receive, @on, etc.) now works in any context. It does behave 
+slightly differently in a single threaded context but you will get the same results in both places. Since Rigz doesn't 
+have an event loop and isn't using tokio for single threaded environments, it will perform the action when requested or 
+when the program ends (if receive is never called directly). I plan on switching to tokio for all use cases but will need 
+to rewrite how processes work, currently they're spun up on an IO thread when multi threaded but this has downsides that 
+need to be addresses anyway. 
+
+## Web Syntax Highlighting
+
+There is now dedicated syntax highlighting for rigz using highlight.js, no more `ruby` or `rust` syntax highlighting to 
+get close enough. It still needs work but at least it will look the way that its meant to and will only get better with 
+time. This highlighting is now being used for blogs and the REPL, once I fully iron it out I'll either make a PR to 
+highlight.js or create a dedicated npm package that can be used. If you need highlighting you can use [@rigz-lang/highlight.js](https://www.npmjs.com/package/@rigz-lang/highlight.js).
+
+## New Features
+
+In the <Link to="/blog/$post" params={{post: 'rigz_0.5.0'}} className='text-blue-500 hover:text-blue-600'>0.5 blog post</Link> I hinted at a lot of the features planned for 0.6, there have been a lot of 
+improvements but still a long ways off on delivering all those goals.
+
+### Completed Features
+
+### rigz_core
+
+There are now dedicated object types in rigz, to support this a minor rewrite was required that introduced the rigz_core package.
+If you'd like to extend rigz this should be the only package you need to add functionality, then call `register_object` or `register_module`
+in `rigz_runtime`. An example will be created to show how to extend rigz if you're embedding it in your own program. I'm exploring options 
+for supporting dynamic libraries that depend on Rust; without embedding rigz in another Rust program there is no way to depend on extra 
+Rust dependencies, we'll see where this ends up but I'm optimistic.
+
+### Imports
+
+Imports have been greatly improved, you can now depend on local or remote files. While there will be a package registry eventually the ability to import 
+urls will fill that gap for now.
+
+```rigz
+import JSON # standard library import
+
+import "utils.rg" # local imports
+
+# url imports, this link doesn't exist
+import "https://registry.rigz-lang.org/inapinch/hello_world"
+```
+
+### Modules
+The HTML, HTTP, and Math modules have been added; the first two also provide objects to better interact with the underlying resources.
+
+### try/catch
+
+While this wasn't mentioned in the last blog post it was a crucial feature that I've wanted in rigz. It's heavily inspired by how zig handles errors;
+`try` will either call the value or return an error from that line, `catch` will call a scope when something goes wrong and optionally passes in the 
+error that occurred. A warning will be logged when you write `try ... catch ...`, since the catch handles the error. However, long term I'd like to be 
+able to handle specific errors and allow chaining catch statements, currently you can't catch an error raised in another catch without wrapping the first 
+call in a function.
+
+## In Progress Features
+
+### match & Enums
+
+The first pass at match and Enums have been added, they're nowhere near Rust so it's much closer to a standard switch/case statement but will improve.
+
+```rigz
+enum Foo
+    Baz,
+    Bar
+end
+
+foo = Foo.Bar
+
+match foo on
+    .Bar -> 42,
+    else -> 37
+end
+```
+
+I don't like adding yet another keyword but using `do` lead to ambiguity, is the do a scope being passed into foo or the match? Rigz should never 
+require parenthesis and the few cases that it does will be fixed in future versions or documented carefully.
+
+
+### Pattern Matching
+
+Getting match working is just one piece of the puzzle, I really want elixir style function pattern matching and have started the process to move 
+in this direction. The VM should support it but the runtime does not, and literals will need to be valid in function definitions (not just as defaults).
+
+### Documentation
+
+A lot of rigz is undocumented or poorly documented at best, documentation will be updated when 0.6 releases until then there would be confusion on what's in 0.6 and 0.5. 
+As the language gets stable you'll be able to view documentation for past versions, I suspect these will be subdomains for the docs link so that I can keep things accurate between versions.
+
+## Remaining Features
+
+### Formatting
+
+Rigz will provide a standard formatter as part of the language. A basic function has been added but it does not format the code correctly. This will 
+be available in the REPL first then added to the 0.6 CLI and LSP.
+
+### LSP
+
+Little progress has been made on the LSP, it includes the format functionality but I need to dig into LSPs more before I can add much here. Additionally
+the way I've structured the parser leads to a bad user experience in the LSP, any error would completely stop the processing. I'm comparing options on 
+how to best handle this, but the option I'm leaning towards is tree-sitter first then if successful call my parser and runtime to get module/object information. 
+While this won't be ideal at least it should apply syntax highlighting and notify all syntax errors before it starts looking for type errors. The main problem is 
+that I will need to update the runtime so that it goes through the entire AST and catalogs errors as they come up, I'm still not 100% sure where I want to take this 
+though so stay tuned.
+
+### Lifecycles and Meta-Programming
+
+Not much progress here, I'm still torn on how exactly to implement this. I need the ability for custom lifecycles, terraform like @plan & @apply type lifecycles, and some sort of 
+macro/code generation functionality. If rigz will always be an interpreted language then Ruby-like metaprogramming is the way to go, otherwise I want something 
+that's going to work for the move to LLVM (either C or Rust style macros but zig's style may be the ideal way to handle this).
+
+## Onward
+
+A lot of progress has been made but still a long ways to go, it's starting to feel like a real language though and I'm looking forward to it all coming together.
+
+Check out the [REPL](https://repl.rigz-lang.org) for a preview!

@@ -1,5 +1,7 @@
 // @ts-expect-error
 import * as Rigz05 from '@/blog/rigz_0.5.0.mdx'
+// @ts-expect-error
+import * as Approaching06 from '@/blog/approaching_0.6.mdx'
 import { Link } from '@tanstack/react-router';
 import { format } from 'date-fns';
 import type { MDXContent } from 'mdx/types';
@@ -15,9 +17,11 @@ export type Blog = {
 
 export const blogs: Record<string, Blog> = {
   'rigz_0.5.0': Rigz05,
+  'approaching_0.6': Approaching06,
 }
 
 export const latest = [
+  'approaching_0.6',
   'rigz_0.5.0',
 ]
 

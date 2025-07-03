@@ -1,6 +1,6 @@
 export const author = 'Mitch'
 export const date = new Date('2025-01-10T12:00')
-export const updated = new Date('2025-05-10T12:00')
+export const updated = new Date('2025-07-03T12:00')
 export const title = 'Rigz 0.5.0'
 export const summary = 'The biggest release of Rigz so far!' 
 
@@ -10,7 +10,7 @@ The biggest changes to Rigz were due to two minor rewrites.
 The first is that Rigz VM is now stack based for simplicity while the language is ironed out. 
 The second rewrite was related to the switch to a stack based VM, values are now fully pass by reference. This change was made to reduce unintended copies from being made. 
 
-```rs
+```rigz
 mut a = 1;
 mut b = a;
 b += 1;
@@ -19,7 +19,7 @@ assert_eq a, b
 
 If you want them to be separate values simply call `.clone`. 
 
-```rs
+```rigz
 mut a = 1;
 mut b = a.clone;
 b += 1;
@@ -31,13 +31,13 @@ assert_neq a, b
 
 This syntax is heavily inspired by terraform and values will be converted to a list when calling it. Values (or keys in maps) that return none will be filtered out.
 
-```python
+```rigz
 [for v in [1, 2, 3, 'a', 'b']: v if v.is_num] # [1, 2, 3]
 ```
 
 A single value is now supported for maps, the key and value will be the same.
 
-```python
+```rigz
 {for k, v in {1, 2, 3}: k, v if k % 2 == 0} # {2 = 2}
 ```
 
@@ -45,7 +45,7 @@ A single value is now supported for maps, the key and value will be the same.
 
 Rigz now supports lambdas or passing functions as a reference
 
-```ruby
+```rigz
 [1, 37, '4', 'a'].filter { |v| 
   v.is_num 
 }.map { |v|
@@ -80,7 +80,7 @@ The @memo lifecycle can be used to add memoization to a function, similar to Pyt
 
 Processes can now be created with the @on lifecycle or by using `spawn`, there's still a lot of work to do here but simple use cases will work.
 
-```rs
+```rigz
 @on("message")
 fn foo(a) = a * 2
 
